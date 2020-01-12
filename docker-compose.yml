@@ -17,7 +17,7 @@ services:
     container_name: lemp-php-fpm
     restart: always
     volumes:
-      - ./app/public/:/var/www/html
+      - ./web/:/var/www/html
     expose:
       - "9000"
   nginx:
@@ -27,23 +27,12 @@ services:
     volumes:
       - ./nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/sites-available:/etc/nginx/sites-available:ro
+      - ./nginx/logs:/var/log/nginx
     volumes_from:
       - php
     ports:
       - "80:80"
-#  redis:
-#    image: redis:latest
-#    container_name: lemp-redis
-#    restart: always
-#  redis-commander:
-#    container_name: redis-commander
-#    hostname: redis-commander
-#    image: rediscommander/redis-commander:latest
-#    restart: always
-#    environment:
-#      - REDIS_HOSTS=local:redis:6379
-#    ports:
-#      - 8081:8081
 #  pma:
 #    image: phpmyadmin/phpmyadmin
 #    container_name: lemp-phpmyadmin
