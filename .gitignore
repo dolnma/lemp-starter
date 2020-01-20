@@ -1,5 +1,5 @@
 # dependencies
 mysql/data
 web
-nginx/logs
 node_modules
+nginx/logs/*
